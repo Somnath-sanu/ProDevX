@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 import { Card } from "@/components/ui/card";
-import { Eye, Heart, MessageSquare, TriangleAlert } from "lucide-react";
+import { Heart, MessageSquare, TriangleAlert } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Id } from "../../../../convex/_generated/dataModel";

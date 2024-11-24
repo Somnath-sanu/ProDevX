@@ -74,7 +74,7 @@ export const BlogSection = ({ blogs }: BlogSectionProps) => {
                       src={blog?.imageUrl || "/blog1.png"}
                       alt={blog.title}
                       fill
-                      className="object-contain"
+                      className="object-contain pl-3"
                     />
                   </div>
 
@@ -101,9 +101,12 @@ export const BlogSection = ({ blogs }: BlogSectionProps) => {
                     <h3 className="text-xl font-semibold mb-2 line-clamp-2">
                       {blog.title}
                     </h3>
-                    <p className="text-muted-foreground line-clamp-2 mb-4">
-                      {blog.content}
-                    </p>
+                    <div className="prose prose-zinc dark:prose-invert max-w-none mb-8">
+                      <p
+                        dangerouslySetInnerHTML={{ __html: blog.content }}
+                        className="whitespace-pre-line"
+                      />
+                    </div>
 
                     <div className="flex items-center gap-4 mt-auto text-muted-foreground">
                       <div className="flex items-center gap-1 text-sm">
@@ -114,10 +117,10 @@ export const BlogSection = ({ blogs }: BlogSectionProps) => {
                         <MessageSquare className="size-4 shrink-0" />
                         <span>{blog.comments.length}</span>
                       </div>
-                      <div className="flex items-center gap-1 text-sm">
+                      {/* <div className="flex items-center gap-1 text-sm">
                         <Eye className="size-4 shrink-0" />
                         <span>0</span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

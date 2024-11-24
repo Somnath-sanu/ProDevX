@@ -181,3 +181,53 @@ export const updateViewCount = mutation({
  * Convex's mutation system ensures atomic updates
     Even with concurrent views, each increment will be processed correctly
  */
+
+export const deleteProject = mutation({
+  args: {
+    projectId: v.id("projects"),
+  },
+  handler: async (ctx, args) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
+    // Get the project
+    const project = await ctx.db.get(args.projectId);
+    if (!project) {
+      throw new Error("Project not found");
+    }
+
+    // Check if the user is the author
+    if (project.authorId !== userId) {
+      throw new Error(
+        "Unauthorized: Only the project author can delete their projects"
+      );
+    }
+
+    // Delete associated likes
+    const likes = await ctx.db
+      .query("likes")
+      .withIndex("by_projectId", (q) => q.eq("projectId", args.projectId))
+      .collect();
+
+    for (const like of likes) {
+      await ctx.db.delete(like._id);
+    }
+
+    // Delete associated messages
+    const messages = await ctx.db
+      .query("messages")
+      .withIndex("by_projectId", (q) => q.eq("projectId", args.projectId))
+      .collect();
+
+    for (const message of messages) {
+      await ctx.db.delete(message._id);
+    }
+
+    // Delete the project
+    await ctx.db.delete(args.projectId);
+
+    return project._id;
+  },
+});

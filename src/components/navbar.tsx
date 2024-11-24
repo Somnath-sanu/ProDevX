@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 import { useConvexAuth } from "convex/react";
@@ -22,6 +22,7 @@ import { UserAvatar } from "./user-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
@@ -54,6 +55,7 @@ const links = [
 ];
 
 export const Navbar = () => {
+  const router = useRouter();
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
 
@@ -118,22 +120,28 @@ export const Navbar = () => {
                   <UserAvatar
                     name={user?.name || "Anonymous"}
                     image={user?.image}
+                    className="border-none outline-none"
                   />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   side="bottom"
                   align="start"
                   sideOffset={20}
-                  asChild
+                  className="w-40"
                 >
-                  <Button
-                    variant="ghost"
-                    disabled={isLoading}
+                  <DropdownMenuItem
+                    onClick={() => router.push(`/users/${user?._id}`)}
+                    className="cursor-pointer font-semibold"
+                  >
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
                     onClick={async () => await signOut()}
-                    className="border-none outline-none"
+                    disabled={isLoading}
+                    className="cursor-pointer text-destructive focus:text-destructive font-semibold"
                   >
                     Sign out
-                  </Button>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </>

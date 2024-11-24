@@ -2,9 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -113,6 +112,8 @@ export default function NewProjectPage() {
 
   const { mutate, isPending } = useCreateProject();
 
+  const [pending, startTransition] = useTransition();
+
   const {
     register,
     handleSubmit,
@@ -126,6 +127,8 @@ export default function NewProjectPage() {
   });
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    if (isPending || pending) return; // Prevent multiple submissions
+
     try {
       const imageUrls = await uploadImages(data.images);
 
@@ -139,13 +142,14 @@ export default function NewProjectPage() {
             toast.success("Congratulations! Project created successfully");
             router.replace("/projects/success");
           },
-          onError: () => {
-            toast.error("Failed!");
+          onError: (error) => {
+            toast.error("Failed to create project. Please try again.");
           },
         }
       );
     } catch (error) {
       console.error("Error creating project:", error);
+      toast.error("Failed to upload images. Please try again.");
     }
   };
 
@@ -215,7 +219,6 @@ export default function NewProjectPage() {
 
   return (
     <div className="min-h-screen">
-    
       <main className="container py-20 px-4 sm:px-0">
         <div className="max-w-3xl mx-auto">
           {/* Progress Steps */}
@@ -244,7 +247,18 @@ export default function NewProjectPage() {
           </div>
 
           {/* Form Steps */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+          <form
+            onSubmit={handleSubmit((data) => {
+              startTransition(async () => {
+                try {
+                  await onSubmit(data);
+                } catch (error) {
+                  console.log(error);
+                }
+              });
+            })}
+            className="space-y-8"
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStep}
@@ -496,17 +510,18 @@ export default function NewProjectPage() {
                 Previous
               </Button>
               {currentStep === steps.length - 1 ? (
-                <Button type="submit" disabled={!isValid || isPending}>
+                <Button
+                  type="submit"
+                  className="w-32"
+                  disabled={!isValid || isPending || pending}
+                >
                   {isPending ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Uploading...
+                      Creating...
                     </>
                   ) : (
-                    <>
-                      Submit Project
-                      <ChevronRight className="h-4 w-4 ml-2" />
-                    </>
+                    "Submit Project"
                   )}
                 </Button>
               ) : (
@@ -516,9 +531,11 @@ export default function NewProjectPage() {
                     e.preventDefault();
                     nextStep();
                   }}
+                  disabled={isPending}
+                  className="w-32"
                 >
-                  Next Step
-                  <ChevronRight className="h-4 w-4 ml-2" />
+                  Next
+                  <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>
               )}
             </div>

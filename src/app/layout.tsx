@@ -49,7 +49,7 @@ export const metadata: Metadata = {
       "Showcase your projects, share knowledge, and connect with developers worldwide. Join ProDevX to build your professional portfolio and grow your career.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/pro1.png",
         width: 1200,
         height: 630,
         alt: "ProDevX Platform Preview",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     title: "ProDevX - Developer Portfolio & Project Showcase Platform",
     description:
       "Showcase your projects, share knowledge, and connect with developers worldwide. Join ProDevX to build your professional portfolio and grow your career.",
-    images: ["/twitter-image.png"],
+    images: ["/pro1.png"],
     creator: "@somnath",
   },
   viewport: {

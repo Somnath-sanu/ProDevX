@@ -11,7 +11,6 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn, formatDate } from "@/lib/utils";
 
-
 import { UseUnreadCount } from "../api/use-unread-count";
 import { useMarkAllAsRead } from "../api/use-mark-all-as-read";
 import { useConvexAuth } from "convex/react";
@@ -35,7 +34,7 @@ export const Notifications = () => {
         >
           <Bell className="size-4" />
 
-          {!unreadCountLoading  && (unreadCount || 0) > 0 && (
+          {!unreadCountLoading && (unreadCount || 0) > 0 && (
             <span className="absolute -top-0.5 -right-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
               {unreadCount}
             </span>
@@ -51,10 +50,13 @@ export const Notifications = () => {
           )} */}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 p-0" align="center">
+      <PopoverContent
+        className="w-80 p-0 mx-auto mt-4 mr-4 sm:mr-2 md:mr-1"
+        align="center"
+      >
         <div className="flex items-center justify-between p-4 border-b">
           <h4 className="font-semibold">Notifications</h4>
-          {!unreadCountLoading  && (unreadCount || 0) > 0 && (
+          {!unreadCountLoading && (unreadCount || 0) > 0 && (
             <Button
               variant="ghost"
               size="sm"

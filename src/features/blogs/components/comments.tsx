@@ -88,7 +88,7 @@ export const Comments = ({ blogId, comments }: CommentsProps) => {
           {!user ? (
             <p>Sign in to add comment</p>
           ) : (
-            <Button type="submit" disabled={isPending}>
+            <Button type="submit" disabled={isPending || !content.trim()}>
               Add Comment
             </Button>
           )}

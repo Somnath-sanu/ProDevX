@@ -38,7 +38,7 @@ const faqs = [
 
 export const FaqSection = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-blue-950/10 to-background">
+    <section className="py-24 bg-gradient-to-b from-blue-950/10 to-background" id="faq">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

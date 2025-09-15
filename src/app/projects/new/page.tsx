@@ -225,9 +225,9 @@ export default function NewProjectPage() {
           <div className="mb-12">
             <div className="relative flex items-center justify-between">
               {steps.map((step, index) => (
-                <div key={step.id} className="flex flex-col items-center">
+                <div key={step.id} className="flex flex-col items-center px-2">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center gap-0 ${
                       currentStep >= index
                         ? "bg-primary text-primary-foreground"
                         : "bg-muted text-muted-foreground"
@@ -235,10 +235,10 @@ export default function NewProjectPage() {
                   >
                     {index + 1}
                   </div>
-                  <span className="text-sm mt-2">{step.title}</span>
+                  {/* <span className="text-sm mt-2 truncate">{step.title}</span> */}
                   {index < steps.length - 1 && (
-                    <div className="absolute left-0 right-0 top-5 -z-10">
-                      <div className="h-[2px] bg-muted" />
+                    <div className="absolute left-0 right-0 top-4 -z-10">
+                      <div className="h-[1px] bg-muted" />
                     </div>
                   )}
                 </div>

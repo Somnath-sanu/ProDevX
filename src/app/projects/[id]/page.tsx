@@ -24,6 +24,7 @@ import { ImageZoom } from "@/features/projects/components/image-zoom";
 import { useIncrementViewCount } from "@/features/projects/api/use-view-count";
 import { FaGithub } from "react-icons/fa";
 import { useCurrentUser } from "@/features/user/api/use-current-user";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const ProjectPage = () => {
   const projectId = useProjectId();
@@ -31,7 +32,7 @@ const ProjectPage = () => {
   const [showHeartAnimation, setShowHeartAnimation] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data: project, isLoading: projectLoading } = useGetProject({
+  const { data: project } = useGetProject({
     projectId,
   }); // cannot get called in async component
 
@@ -83,7 +84,7 @@ const ProjectPage = () => {
     );
   };
 
-  if (projectLoading) {
+  if (project === undefined) {
     return (
       <div className="min-h-screen">
         <div className="h-screen flex flex-1 flex-col gap-2 items-center justify-center">
@@ -93,7 +94,7 @@ const ProjectPage = () => {
     );
   }
 
-  if (!project) {
+  if (project === null) {
     return (
       <div className="min-h-screen">
         <main className="container py-20">
@@ -108,7 +109,7 @@ const ProjectPage = () => {
 
   return (
     <>
-      <div className="min-h-screen">
+      <div className="min-h-screen container">
         <main className="container py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -185,13 +186,12 @@ const ProjectPage = () => {
                   href={`/users/${project.userId}`}
                   className="flex items-center gap-x-3"
                 >
-                  <Image
-                    src={project.image || "/coder.png"}
-                    alt={project.name}
-                    width={48}
-                    height={48}
-                    className="rounded-full"
-                  />
+                  <Avatar>
+                    <AvatarImage src={project.image} />
+                    <AvatarFallback>
+                      {project.name?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
                   <div>
                     <p className="font-medium">{project.name}</p>
                     <p className="text-sm text-muted-foreground">

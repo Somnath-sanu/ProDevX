@@ -9,31 +9,30 @@ import { FeaturedProject } from "@/features/projects/components/featured-project
 
 import { ProjectCard } from "@/features/projects/components/project-card";
 import { Loader, TriangleAlert } from "lucide-react";
-import { ProjectsFilterPage } from "./filter-project";
-import { useCallback, useState } from "react";
-import MonthYearFilter from "@/features/projects/components/month-year-filter";
+// import { ProjectsFilterPage } from "./filter-project";
+// import { useState } from "react";
+// import MonthYearFilter from "@/features/projects/components/month-year-filter";
 
 const ProjectsPage = () => {
-  const [dateFilter, setDateFilter] = useState<{
-    startDate?: string;
-    endDate?: string;
-  }>({});
+  // const [dateFilter, setDateFilter] = useState<{
+  //   startDate?: string;
+  //   endDate?: string;
+  // }>({});
 
-  const { data: projects, isLoading: projectsLoading } =
-    useGetProjects(dateFilter);
+  const { data: projects, isLoading: projectsLoading } = useGetProjects({});
   const { data: featuredProject, isLoading: featuredProjectLoading } =
-    useGetFeaturedProject(dateFilter);
+    useGetFeaturedProject({});
 
-  const onFilterChange = useCallback(
-    (startDate: Date | null, endDate: Date | null) => {
-      setDateFilter({
-        startDate: startDate?.toISOString(), //2024-11-24T11:43:27.982Z
-        // toString -> Sun Nov 24 2024 18:07:30 GMT+0530 (India Standard Time)
-        endDate: endDate?.toISOString(),
-      });
-    },
-    []
-  );
+  // const onFilterChange = useCallback(
+  //   (startDate: Date | null, endDate: Date | null) => {
+  //     setDateFilter({
+  //       startDate: startDate?.toISOString(), //2024-11-24T11:43:27.982Z
+  //       // toString -> Sun Nov 24 2024 18:07:30 GMT+0530 (India Standard Time)
+  //       endDate: endDate?.toISOString(),
+  //     });
+  //   },
+  //   []
+  // );
 
   if (projectsLoading || featuredProjectLoading) {
     return (
@@ -49,12 +48,12 @@ const ProjectsPage = () => {
     return (
       <div className="min-h-screen">
         <main className="container py-20 flex flex-col gap-y-10">
-          <div className="ml-auto pr-4">
+          {/* <div className="ml-auto pr-4">
             <MonthYearFilter onFilterChange={onFilterChange} />
-          </div>
+          </div> */}
           <div className="flex flex-col items-center justify-center overflow-hidden">
             <TriangleAlert className="size-8" />
-            <span>No Projects found</span>
+            <span>No Projects yet!</span>
           </div>
         </main>
       </div>
@@ -69,10 +68,10 @@ const ProjectsPage = () => {
             {featuredProject && (
               <div className="mb-8">
                 <div className="flex justify-between items-center mb-6 flex-col sm:flex-row gap-y-4">
-                  <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+                  {/* <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
                     Featured Project
-                  </h2>
-                  <MonthYearFilter onFilterChange={onFilterChange} />
+                  </h2> */}
+                  {/* <MonthYearFilter onFilterChange={onFilterChange} /> */}
                 </div>
                 <div className="grid gap-6 md:p-0 p-2">
                   <FeaturedProject project={featuredProject} />
@@ -95,7 +94,7 @@ const ProjectsPage = () => {
                 </Card>
               ))}
             </div>
-            {projects.length < 1 && (
+            {projects.length === 0 && (
               <div className="m-auto w-full flex justify-center items-center">
                 <div className="flex flex-col items-center justify-center overflow-hidden">
                   <TriangleAlert className="size-8" />

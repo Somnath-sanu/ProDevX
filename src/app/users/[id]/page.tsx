@@ -151,7 +151,7 @@ const UserProfilePage = () => {
           </div>
 
           {/* Right column - Projects Grid */}
-          <Tabs defaultValue="projects" className="lg:col-span-8">
+          <Tabs defaultValue="projects" className="lg:col-span-8 pt-2">
             <TabsList className="w-full h-9 py-2">
               <TabsTrigger value="projects" className="flex-1">
                 Projects

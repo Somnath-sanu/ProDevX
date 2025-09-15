@@ -3,42 +3,25 @@
 import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaTwitter } from "react-icons/fa";
 
 const navigation = {
   product: [
     { name: "Features", href: "#" },
     { name: "Projects", href: "/projects" },
     { name: "Blog", href: "/blog" },
-    { name: "FAQ", href: "#" },
-  ],
-  company: [
-    { name: "About", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Contact", href: "#" },
-    { name: "Terms", href: "#" },
-  ],
-  legal: [
-    { name: "Privacy", href: "#" },
-    { name: "Terms", href: "#" },
-    { name: "Cookie Policy", href: "#" },
-    { name: "License", href: "#" },
+    { name: "FAQ", href: "#faq" },
   ],
   social: [
     {
-      name: "Twitter",
-      href: "#",
-      icon: FaTwitter,
-    },
-    {
       name: "GitHub",
-      href: "#",
+      href: "https://github.com/Somnath-sanu",
       icon: FaGithub,
     },
     {
-      name: "LinkedIn",
-      href: "#",
-      icon: FaLinkedin,
+      name: "X",
+      href: "https://x.com/sanu7326_mishra",
+      icon: FaTwitter,
     },
   ],
 };
@@ -48,69 +31,34 @@ export const Footer = () => {
     <footer className="bg-background border-t">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <nav
-          className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-3 lg:gap-12 max-w-4xl mx-auto"
+          className="flex items-center max-w-4xl mx-auto"
           aria-label="Footer"
         >
-          <div className="space-y-4">
+          <div className="space-y-4 flex flex-col items-start justify-center">
             <div className="text-sm font-semibold leading-6 text-foreground">
               Product
             </div>
-            <ul className="space-y-3">
+            <div className="flex items-center justify-center gap-4">
               {navigation.product.map((item) => (
-                <li key={item.name}>
+                <div key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-sm leading-6 text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-sm leading-6 text-muted-foreground hover:text-foreground transition-colors flex"
                   >
                     {item.name}
                   </Link>
-                </li>
+                </div>
               ))}
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <div className="text-sm font-semibold leading-6 text-foreground">
-              Company
             </div>
-            <ul className="space-y-3">
-              {navigation.company.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-sm leading-6 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <div className="text-sm font-semibold leading-6 text-foreground">
-              Legal
-            </div>
-            <ul className="space-y-3">
-              {navigation.legal.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-sm leading-6 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </nav>
 
         <div className="mt-12 pt-8 border-t">
           <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
             <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} DevShowcase. All rights
-              reserved.
+              &copy; {new Date().getFullYear()} ProDevX. All rights reserved.
             </p>
-            <div className="flex gap-6">
+            <div className="flex gap-4">
               {navigation.social.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -121,7 +69,7 @@ export const Footer = () => {
                     size="icon"
                     className="hover:text-foreground text-muted-foreground"
                   >
-                    <Link href={item.href}>
+                    <Link href={item.href} target="_blank">
                       <Icon className="size-5" aria-hidden="true" />
                       <span className="sr-only">{item.name}</span>
                     </Link>

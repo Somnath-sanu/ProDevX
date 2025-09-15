@@ -95,7 +95,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               <Navbar />
-              <div className="mx-auto container">
+              <div className="mx-auto container px-6 max-w-screen">
                 {" "}
                 <Toaster /> {children}
               </div>

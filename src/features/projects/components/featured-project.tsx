@@ -29,8 +29,8 @@ interface FeaturedProjectProps {
     images: string[];
     techStack: string[];
     likes: number;
-    name: string;
-    image: string; // userImage
+    name?: string;
+    image?: string; // userImage
     views: number;
     messages: number;
     _creationTime: number;
@@ -137,7 +137,7 @@ export const FeaturedProject = ({ project }: FeaturedProjectProps) => {
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <UserAvatar
-                  name={project.name}
+                  name={project.name || ""}
                   image={project.image}
                   className="ring-2"
                 />

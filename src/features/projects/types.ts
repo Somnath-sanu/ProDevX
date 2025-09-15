@@ -4,12 +4,12 @@ export interface ProjectDataInterface {
   authorId: Id<"users">;
   description: string;
   githubLink: string;
-  image: string;
+  image?: string;
   images: string[];
   likes: number;
   liveLink: string;
   messages: number;
-  name: string;
+  name?: string;
   techStack: string[];
   title: string;
   userId: Id<"users">;

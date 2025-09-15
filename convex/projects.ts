@@ -66,10 +66,10 @@ export const getProjects = query({
     endDate: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const userId = await getAuthUserId(ctx);
-    if (!userId) {
-      return [];
-    }
+    // const userId = await getAuthUserId(ctx);
+    // if (!userId) {
+    //   return [];
+    // }
 
     const projects = await ctx.db.query("projects").order("desc").collect();
 
@@ -108,10 +108,10 @@ export const getFeaturedProject = query({
     endDate: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const userId = await getAuthUserId(ctx);
-    if (!userId) {
-      return null;
-    }
+    // const userId = await getAuthUserId(ctx);
+    // if (!userId) {
+    //   return null;
+    // }
 
     let project;
 
@@ -185,13 +185,13 @@ export const updateViewCount = mutation({
 export const deleteProject = mutation({
   args: {
     projectId: v.id("projects"),
+    isAdmin: v.boolean(),
   },
   handler: async (ctx, args) => {
     const userId = await getAuthUserId(ctx);
     if (!userId) {
       throw new Error("Unauthorized");
     }
-
     // Get the project
     const project = await ctx.db.get(args.projectId);
     if (!project) {
@@ -199,7 +199,7 @@ export const deleteProject = mutation({
     }
 
     // Check if the user is the author
-    if (project.authorId !== userId) {
+    if (project.authorId !== userId && !args.isAdmin) {
       throw new Error(
         "Unauthorized: Only the project author can delete their projects"
       );

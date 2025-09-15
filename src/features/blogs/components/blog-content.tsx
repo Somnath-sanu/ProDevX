@@ -26,7 +26,7 @@ export const BlogContent = ({ blog }: BlogContentProps) => {
     "This action cannot be undone"
   );
 
-  const handleDelete = async () => {
+  const handleDelete = async (isAdmin: boolean) => {
     const ok = await confirm();
 
     if (!ok) {
@@ -34,7 +34,7 @@ export const BlogContent = ({ blog }: BlogContentProps) => {
     }
 
     deleteBlog(
-      { blogId: blog._id },
+      { blogId: blog._id, isAdmin },
       {
         onSuccess: () => {
           toast.success("Blog deleted successfully");
@@ -69,11 +69,16 @@ export const BlogContent = ({ blog }: BlogContentProps) => {
               </p>
             </div>
           </div>
-          {user?._id === blog.authorId && (
+          {(user?._id === blog.authorId ||
+            user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) && (
             <Button
               variant="ghost"
               size="icon"
-              onClick={handleDelete}
+              onClick={() => {
+                handleDelete(
+                  user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL
+                );
+              }}
               className="shrink-0 hover:bg-red-500"
             >
               <Trash2 className="size-4 shrink-0" />

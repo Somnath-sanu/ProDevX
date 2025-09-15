@@ -40,6 +40,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
   const { data: isLikedByUser, isLoading: isLikeLoading } = useUserLikedProject(
     { projectId: project._id }
   );
+
   const { data: currentUser } = useCurrentUser();
   const { mutate: deleteProject, isPending } = useDeleteProject();
 
@@ -48,14 +49,14 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
     "This action cannot be undone"
   );
 
-  const handleDelete = async (e: React.MouseEvent) => {
+  const handleDelete = async (e: React.MouseEvent, isAdmin: boolean) => {
     e.preventDefault();
 
     const ok = await confirm();
     if (!ok) return;
 
     await deleteProject(
-      { projectId: project._id },
+      { projectId: project._id, isAdmin },
       {
         onSuccess: () => {
           toast.success("Project deleted successfully");
@@ -72,15 +73,21 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
     <>
       <ConfirmDialog />
       <motion.div
-        className="group relative rounded-lg bg-card p-4 transition-colors hover:bg-accent shadow-sm border h-[490px] flex flex-col"
+        className="group relative rounded-lg bg-card p-4 transition-colors hover:bg-accent shadow-sm border h-fit flex flex-col"
         whileHover={{ y: -2 }}
       >
-        {currentUser?._id === project.authorId && (
+        {(currentUser?._id === project.authorId ||
+          currentUser?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) && (
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-2 top-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive hover:text-destructive-foreground"
-            onClick={handleDelete}
+            className="absolute right-2 top-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive hover:text-destructive-foreground max-sm:opacity-100"
+            onClick={(e) => {
+              handleDelete(
+                e,
+                currentUser?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL
+              );
+            }}
           >
             <Trash2 className="size-4" />
           </Button>

@@ -7,7 +7,8 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import { api } from "../../../../convex/_generated/api";
 
 type RequestType = {
- blogId: Id<"blogs">
+ blogId: Id<"blogs">;
+ isAdmin: boolean
 };
 type ResponseType = Id<"blogs"> | null;
 

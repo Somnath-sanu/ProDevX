@@ -155,6 +155,7 @@ export const toggleLike = mutation({
 export const deleteBlog = mutation({
   args: {
     blogId: v.id("blogs"),
+    isAdmin: v.boolean()
   },
   handler: async (ctx, args) => {
     const userId = await getAuthUserId(ctx);
@@ -167,7 +168,7 @@ export const deleteBlog = mutation({
       throw new Error("Blog not found");
     }
 
-    if (blog.authorId !== userId) {
+    if (blog.authorId !== userId && !args.isAdmin) {
       throw new Error("You can only delete your own blogs");
     }
 

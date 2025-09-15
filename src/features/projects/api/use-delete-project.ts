@@ -8,6 +8,7 @@ import { api } from "../../../../convex/_generated/api";
 
 type RequestType = {
   projectId: Id<"projects">;
+  isAdmin: boolean
 };
 type ResponseType = Id<"projects"> | null;
 

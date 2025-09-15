@@ -1,29 +1,31 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
-import { toast } from "sonner";
+// import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";
+// import { Textarea } from "@/components/ui/textarea";
+// import { useState } from "react";
+// import { toast } from "sonner";
+import { FaTwitter } from "react-icons/fa";
+import Link from "next/link";
 
 const ContactPage = () => {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  // const [formState, setFormState] = useState({
+  //   name: "",
+  //   email: "",
+  //   message: "",
+  // });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
 
-    await toast.success("Thanks for approaching us");
-    setFormState({
-      name: "",
-      email: "",
-      message: "",
-    });
-  };
+  //   await toast.success("Thanks for approaching us");
+  //   setFormState({
+  //     name: "",
+  //     email: "",
+  //     message: "",
+  //   });
+  // };
 
   return (
     <div className="min-h-screen pt-20 px-4 md:px-8">
@@ -58,12 +60,24 @@ const ContactPage = () => {
                 </p>
                 <p className="flex items-center space-x-2">
                   <span>📧</span>
-                  <span>somnathmishra100mbi@gmail.com</span>
+                  <span>somnath100dbi@gmail.com</span>
+                </p>
+                <p className="flex items-center space-x-2">
+                  <span>
+                    <FaTwitter />
+                  </span>
+                  <Link
+                    href={"https://x.com/sanu7326_mishra"}
+                    target="_blank"
+                    className="text-blue-500 no-underline"
+                  >
+                    Somnath
+                  </Link>
                 </p>
               </div>
             </div>
           </motion.div>
-
+          {/* 
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -125,7 +139,7 @@ const ContactPage = () => {
                 Send Message
               </Button>
             </form>
-          </motion.div>
+          </motion.div> */}
         </div>
       </motion.div>
     </div>

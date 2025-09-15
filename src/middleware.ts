@@ -5,7 +5,7 @@ import {
 } from "@convex-dev/auth/nextjs/server";
 
 const isPublicPage = createRouteMatcher(["/auth"]);
-const ignoredRoute = createRouteMatcher(["/"]);
+const ignoredRoute = createRouteMatcher(["/", "/about", "/contact", "/blogs" , "/projects"]);
 
 export default convexAuthNextjsMiddleware((request, { convexAuth }) => {
   if (ignoredRoute(request)) {

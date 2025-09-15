@@ -18,14 +18,13 @@ const BlogsPage = () => {
     );
   }
 
-  if (!blogs || blogs.length < 1) {
+  if (!blogs || blogs.length === 0) {
     return (
-      <div className="min-h-screen">
-        
-        <main className="container py-20">
-          <div className="flex flex-col items-center justify-center h-screen overflow-hidden">
+      <div className="h-full w-full">
+        <main className="container py-20 h-full w-full">
+          <div className="flex flex-col w-full h-full items-center justify-center overflow-hidden">
             <TriangleAlert className="size-8" />
-            <span>No Blogs found</span>
+            <span>No Blogs yet!</span>
           </div>
         </main>
       </div>
@@ -34,7 +33,6 @@ const BlogsPage = () => {
 
   return (
     <div className="min-h-screen">
-      
       <div className="container py-20">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold pl-2">Blog Posts</h1>

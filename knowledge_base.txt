@@ -1,0 +1,236 @@
+# ProDevX Knowledge Base
+
+## General Information
+
+### What is ProDevX?
+ProDevX is a platform for developers to showcase their projects, share blog posts, and connect with other developers. It's built with Next.js, TypeScript, and Convex backend.
+
+### Tech Stack
+- Frontend: Next.js 13+ with App Router
+- Language: TypeScript
+- Styling: Tailwind CSS with Shadcn UI components
+- Backend: Convex
+- Authentication: Built-in auth system
+- Rich Text Editor: TipTap
+- Form Handling: React Hook Form with Zod validation
+
+### How to Set Up the Project?
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Set up environment variables:
+   - Configure Convex credentials
+   - Set up authentication settings
+4. Run development server: `npm run dev`
+5. Access the application at http://localhost:3000
+
+## Authentication
+
+### How do I sign up?
+1. Click on "Sign Up" in the navigation bar
+2. Fill in your details:
+   - Name
+   - Email
+   - Password
+3. Submit the form to create your account
+
+### How do I sign in?
+1. Click on "Sign In" in the navigation bar
+2. Enter your email and password
+3. Click "Sign In" to access your account
+
+### Common Auth Issues
+1. Email verification not received
+   - Check spam folder
+   - Request new verification email
+2. Password reset
+   - Use "Forgot Password" link
+   - Follow email instructions
+3. Session expired
+   - Re-login required
+   - Check browser cookies
+
+## Blog Features
+
+### How do I create a blog post?
+1. Navigate to "/blogs/create"
+2. Fill in the blog details:
+   - Title
+   - Content using rich text editor
+   - Add images (optional)
+3. Click "Publish" to make your blog live
+
+### Blog Management
+- Edit blog: Click "Edit" on your blog post
+- Delete blog: Use "Delete" option (only for your own blogs)
+- Like/Unlike: Click heart icon
+- Comment: Use comment section below blog posts
+
+### Blog Interactions
+- Commenting system
+- Like/Unlike functionality
+- Share options
+- Report inappropriate content
+
+## Project Features
+
+### How do I showcase a project?
+1. Go to "/projects/new"
+2. Fill project details:
+   - Title
+   - Description
+   - Technologies used
+   - Project images
+   - GitHub/Demo links
+3. Submit for showcase
+
+### Project Management
+- Edit project details
+- Update project status
+- Remove projects
+- Pin important projects
+
+### Project Visibility
+- Public vs Private projects
+- Featured projects on profile
+- Project categories and tags
+
+## User Features
+
+### Profile Management
+1. Access profile settings
+2. Update profile information:
+   - Profile picture
+   - Bio
+   - Social links
+   - Skills/Technologies
+
+### User Interactions
+- Follow other users
+- Message system
+- Activity notifications
+- Profile visibility settings
+
+## Common Issues and Solutions
+
+### Performance Issues
+1. Slow loading:
+   - Clear browser cache
+   - Check internet connection
+   - Verify server status
+
+### Image Upload Problems
+1. Image upload fails:
+   - Check file size (max 5MB)
+   - Supported formats: PNG, JPG, JPEG
+   - Try compressing the image
+
+### Error Messages
+1. "Unable to connect to server":
+   - Check internet connection
+   - Server might be down
+   - Clear browser cache
+
+2. "Unauthorized access":
+   - Login again
+   - Check permissions
+   - Session might have expired
+
+## Features by Section
+
+### Home Page
+- Featured projects
+- Latest blogs
+- Trending content
+- Quick access to key features
+
+### Blog Section
+- Create, edit, delete blogs
+- Rich text editor
+- Image upload
+- Comment system
+- Like/Unlike functionality
+
+### Projects Section
+- Project showcase
+- Multiple image upload
+- Technology tags
+- Project status tracking
+- View analytics
+
+### User Dashboard
+- Activity overview
+- Content management
+- Notification center
+- Message inbox
+
+## Tips and Best Practices
+
+### Content Creation
+1. Blog writing:
+   - Use clear headings
+   - Add relevant images
+   - Properly format code snippets
+   - Tag appropriately
+
+2. Project showcase:
+   - Include detailed description
+   - Add high-quality screenshots
+   - Provide working links
+   - List technologies used
+
+### Account Security
+1. Password best practices:
+   - Use strong passwords
+   - Enable two-factor authentication
+   - Regular password updates
+   - Don't share credentials
+
+### Performance Optimization
+1. Image uploads:
+   - Compress before upload
+   - Use appropriate formats
+   - Optimize resolution
+   - Limit number of images
+
+## Support and Help
+
+### Getting Help
+1. Contact support:
+   - Use contact form
+   - Email support team
+   - Check FAQ section
+   - Community forums
+
+### Reporting Issues
+1. Bug reports:
+   - Describe the issue
+   - Steps to reproduce
+   - Expected vs actual behavior
+   - Screenshots if applicable
+
+### Feature Requests
+1. Requesting new features:
+   - Describe use case
+   - Provide examples
+   - Explain benefits
+   - Submit through proper channel
+
+## Technical Details
+
+### API Usage
+- Rate limits
+- Authentication tokens
+- API endpoints
+- Error handling
+
+### Browser Support
+- Supported browsers
+- Minimum versions
+- Known limitations
+- Mobile compatibility
+
+### Data Privacy
+- User data handling
+- Privacy settings
+- Data retention
+- Export options

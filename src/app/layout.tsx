@@ -84,6 +84,13 @@ export default function RootLayout({
   return (
     <ConvexAuthNextjsServerProvider>
       <html lang="en" suppressHydrationWarning>
+        <head>
+          <script
+            async
+            src="https://echo-widget-gamma.vercel.app/widget.js"
+            data-organization-id="org_315YpRUHhR6XRlqEF7ebCyCdtgS"
+          ></script>
+        </head>
         <body
           className={`${poppins.variable} ${spaceGrotesk.variable} font-sans`}
         >

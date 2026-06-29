@@ -61,7 +61,11 @@ export const CreateBlogForm = () => {
       });
     } catch (error) {
       setIsUploading(false);
-      toast.error("Failed to upload image");
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
     }
   };
 

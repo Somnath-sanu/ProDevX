@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConvexClientProvider } from "@/components/convex-client-provider";
@@ -7,16 +7,11 @@ import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import { Toaster } from "@/components/ui/sonner";
 import { Navbar } from "@/components/navbar";
 
-const poppins = Poppins({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -42,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://prodevx.com",
+    url: "https://devs24.com",
     siteName: "ProDevX",
     title: "ProDevX - Developer Portfolio & Project Showcase Platform",
     description:
@@ -91,9 +86,7 @@ export default function RootLayout({
             data-organization-id="org_315YpRUHhR6XRlqEF7ebCyCdtgS"
           ></script>
         </head>
-        <body
-          className={`${poppins.variable} ${spaceGrotesk.variable} font-sans`}
-        >
+        <body className={`${inter.variable} font-sans antialiased`}>
           <ConvexClientProvider>
             <ThemeProvider
               attribute="class"
@@ -102,10 +95,8 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               <Navbar />
-              <div className="mx-auto container px-6 max-w-screen">
-                {" "}
-                <Toaster /> {children}
-              </div>
+              <Toaster />
+              <main className="min-h-screen pt-16">{children}</main>
             </ThemeProvider>
           </ConvexClientProvider>
         </body>

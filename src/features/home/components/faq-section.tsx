@@ -7,68 +7,95 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 
 const faqs = [
   {
-    question: "What is this platform for?",
+    question: "What should I publish on ProDevX?",
     answer:
-      "This platform is designed for developers to showcase their projects, share knowledge through blogs, and connect with the developer community. It's a space where you can build your portfolio and engage with other developers.",
+      "Publish complete projects, experiments, learning builds, open-source tools, and blogs that explain your decisions. The platform works best when the project page shows the result and the blog explains the journey.",
   },
   {
-    question: "How can I share my projects?",
+    question: "Can I use it as my developer portfolio?",
     answer:
-      "After signing up, you can easily create project entries with descriptions, images, and links to your repositories. You can also add tags and categorize your projects for better visibility.",
+      "Yes. Your profile collects projects and blogs in one place, so visitors can understand your technical range, writing style, and consistency without jumping between scattered links.",
   },
   {
-    question: "Can I write technical blogs?",
+    question: "Do blogs support technical storytelling?",
     answer:
-      "Yes! You can write and publish technical blogs about your experiences, tutorials, or any tech-related topics. The platform supports rich text formatting and code snippets.",
+      "Yes. Blogs are meant for implementation notes, tutorials, launch retrospectives, debugging stories, and the small decisions that make a project credible.",
   },
   {
-    question: "Is it free to use?",
+    question: "How does community interaction work?",
     answer:
-      "Yes, the platform is completely free to use. You can create unlimited projects and blog posts, and engage with the community without any cost.",
+      "Developers can discover posts, like projects and blogs, leave comments, and follow the work back to the creator profile. The goal is useful feedback and better visibility.",
   },
   {
-    question: "How can I get more visibility for my work?",
+    question: "Is the platform free?",
     answer:
-      "Engage with the community by sharing quality content, commenting on others' work, and maintaining an active profile. You can also share your projects and blogs on social media directly from the platform.",
+      "Yes. You can create projects, write blogs, and use your profile as a public portfolio without a paid plan.",
   },
+];
+
+const promises = [
+  "Project pages for proof of work",
+  "Blogs for the build journey",
+  "Profiles that connect both sides",
 ];
 
 export const FaqSection = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-blue-950/10 to-background" id="faq">
-      <div className="container px-4">
+    <section
+      className="bg-zinc-950 px-6 py-24 text-white md:px-12 lg:px-16"
+      id="faq"
+    >
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600 h-full">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Find answers to common questions about our platform
+          <p className="text-sm font-medium uppercase tracking-[0.28em] text-white/40">
+            Questions
           </p>
+          <h2 className="mt-4 max-w-lg text-4xl font-medium tracking-tight md:text-5xl">
+            A cleaner way to make your work understandable.
+          </h2>
+          <p className="mt-6 max-w-xl text-lg leading-8 text-white/60">
+            ProDevX is built around the way developers actually grow: by
+            shipping, explaining, getting feedback, and making the next version
+            sharper.
+          </p>
+
+          <div className="mt-10 space-y-4">
+            {promises.map((promise) => (
+              <div key={promise} className="flex items-center gap-3">
+                <CheckCircle2 className="size-5 text-emerald-300" />
+                <span className="text-white/78">{promise}</span>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto"
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="liquid-glass rounded-xl border border-white/10 p-4 md:p-6"
         >
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left">
+              <AccordionItem
+                key={faq.question}
+                value={`item-${index}`}
+                className="border-white/10"
+              >
+                <AccordionTrigger className="py-5 text-left text-base font-medium text-white hover:text-emerald-200 hover:no-underline md:text-lg">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">
+                <AccordionContent className="text-sm leading-7 text-white/62 md:text-base">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

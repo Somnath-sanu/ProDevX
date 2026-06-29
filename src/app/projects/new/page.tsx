@@ -148,8 +148,12 @@ export default function NewProjectPage() {
         }
       );
     } catch (error) {
-      console.error("Error creating project:", error);
-      toast.error("Failed to upload images. Please try again.");
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+      else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
     }
   };
 
@@ -158,7 +162,7 @@ export default function NewProjectPage() {
     if (!files) return;
 
     if (files.length > 4) {
-      toast.error("You can select maximum 4 images");
+      toast.error("You can only select maximum 4 images");
       e.target.value = ""; // Reset input
       return;
     }
@@ -208,7 +212,7 @@ export default function NewProjectPage() {
     }[currentStep];
 
     const isStepValid = await trigger(fieldsToValidate as any);
-    console.log({ fieldsToValidate, isStepValid });
+    // console.log({ fieldsToValidate, isStepValid });
 
     if (isStepValid) {
       setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));

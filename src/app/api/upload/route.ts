@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { MAX_SIZE } from "@/lib/utils";
 import { put } from "@vercel/blob";
 import { NextResponse } from "next/server";
 
@@ -9,12 +10,20 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!filename) {
     return NextResponse.json(
       { error: "Filename is required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   try {
     const blob = await request.blob();
+
+    if (blob.size > MAX_SIZE) {
+      return NextResponse.json(
+        { error: "File size exceeds 4.5 MB." },
+        { status: 413 },
+      );
+    }
+
     /**
      * The request.blob() method is used to extract the binary data (like images, files, etc.) from an HTTP request.
      * When you upload a file through your form, the file is sent as binary data in the request body
@@ -50,7 +59,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   } catch (error) {
     return NextResponse.json(
       { error: "Error uploading file" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

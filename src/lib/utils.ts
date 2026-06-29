@@ -16,3 +16,5 @@ export const formatNumber = (number: number): string => {
     maximumFractionDigits: 1,
   }).format(number);
 };
+
+export const MAX_SIZE = 4.5 * 1024 * 1024; // 4.5 MB in bytes

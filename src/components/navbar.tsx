@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Menu, Moon, Sun } from "lucide-react";
+import { Menu, Moon, Sparkles, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import {
   Sheet,
@@ -38,11 +38,11 @@ const links = [
   },
 
   {
-    label: "New Project",
+    label: "Create project",
     href: "/projects/new",
   },
   {
-    label: "New Blog",
+    label: "Create blog",
     href: "/blogs/create",
   },
   {
@@ -65,32 +65,27 @@ export const Navbar = () => {
   const { data: user } = useCurrentUser();
 
   return (
-    <nav className="fixed w-full border-b border-border/40 bg-background/60 backdrop-blur-md supports-[backdrop-filter]:bg-background/40 z-[100]">
-      <div className="container flex h-16 items-center justify-between px-4 md:px-8">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <div className="relative w-8 h-8">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg transform rotate-45"></div>
-            <div className="absolute inset-0 flex items-center justify-center text-white font-bold">
-              P
-            </div>
-          </div>
-          <span className="font-bold text-xl bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+    <nav className="fixed left-0 top-0 z-[100] w-full px-4 pt-4 md:px-8 lg:px-12">
+      <div className="liquid-glass mx-auto flex h-14 max-w-7xl items-center justify-between rounded-xl px-3 text-white shadow-2xl shadow-black/10 md:px-4">
+        <Link href="/" className="flex items-center gap-2">
+          <span className="grid size-8 place-items-center rounded-lg bg-white text-sm font-semibold text-black">
+            PX
+          </span>
+          <span className="text-xl font-semibold tracking-tight">
             ProDevX
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <nav className="hidden items-center gap-7 text-sm font-medium lg:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "transition-colors hover:text-foreground/80",
+                "transition-colors hover:text-white",
                 pathname === link.href
-                  ? "text-foreground font-semibold"
-                  : "text-foreground/60"
+                  ? "text-white"
+                  : "text-white/65"
               )}
             >
               {link.label}
@@ -98,13 +93,12 @@ export const Navbar = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
-          {/* Theme Toggle */}
+        <div className="flex items-center gap-2 md:gap-3">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="hidden md:flex"
+            className="hidden text-white hover:bg-white/10 hover:text-white md:flex"
           >
             <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -113,7 +107,6 @@ export const Navbar = () => {
 
           <Notifications />
 
-          {/* Sign In Button (Desktop) */}
           {isAuthenticated ? (
             <>
               <DropdownMenu>
@@ -148,22 +141,29 @@ export const Navbar = () => {
             </>
           ) : (
             <Link href="/auth" className="hidden md:block">
-              <Button variant="default" disabled={isLoading}>
+              <Button
+                disabled={isLoading}
+                className="h-9 rounded-lg bg-white px-5 text-sm font-medium text-black hover:bg-white/90"
+              >
+                <Sparkles className="mr-2 size-4" />
                 Sign In
               </Button>
             </Link>
           )}
 
-          {/* Mobile Menu */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:bg-white/10 hover:text-white lg:hidden"
+              >
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[250px] sm:w-[400px] pt-20">
-              <SheetHeader className="border-b">
+            <SheetContent side="right" className="w-[280px] pt-20 sm:w-[400px]">
+              <SheetHeader className="border-b pb-4">
                 <SheetTitle className="p-2">Menu</SheetTitle>
               </SheetHeader>
 
@@ -202,6 +202,15 @@ export const Navbar = () => {
                     </span>
                   </Button>
                 </SheetClose>
+                {!isAuthenticated && (
+                  <SheetClose asChild>
+                    <Link href="/auth">
+                      <Button className="w-full justify-center rounded-lg">
+                        Sign In
+                      </Button>
+                    </Link>
+                  </SheetClose>
+                )}
               </nav>
             </SheetContent>
           </Sheet>

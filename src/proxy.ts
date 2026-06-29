@@ -5,6 +5,7 @@ import {
 } from "@convex-dev/auth/nextjs/server";
 
 const isPublicPage = createRouteMatcher(["/auth"]);
+
 const ignoredRoute = createRouteMatcher([
   "/",
   "/about",
@@ -30,7 +31,10 @@ export default convexAuthNextjsMiddleware(async (request, { convexAuth }) => {
 });
 
 export const config = {
-  // The following matcher runs middleware on all routes
-  // except static assets.
-  matcher: ["/((?!.*\\..*|_next).*)", "/projects", "/blogs", "/(api|trpc)(.*)"],
+  matcher: [
+    "/((?!.*\\..*|_next).*)",
+    "/projects",
+    "/blogs",
+    "/(api|trpc)(.*)",
+  ],
 };

@@ -109,7 +109,7 @@ const ProjectPage = () => {
 
   return (
     <>
-      <div className="min-h-screen container">
+      <div className="min-h-screen container px-4 sm:px-4 lg:px-4">
         <main className="container py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
